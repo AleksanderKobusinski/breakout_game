@@ -1,4 +1,5 @@
-from turtle import Screen
+from dis import dis
+from turtle import Screen, distance
 from player import Player
 from ball import Ball
 from scoreboard import Scoreboard
@@ -28,10 +29,18 @@ while game_is_on:
     time.sleep(0.1)
     ball.move(direction)
     
+    for num in range(3):
+        if ball.ball.distance(player.paddle[num]) < 20 and direction == 0:
+            direction = 3
+        if ball.ball.distance(player.paddle[num]) < 20 and direction == 1:
+            direction = 2
+    
     if ball.ball.xcor() >= 280 and direction == 0:
         direction = 1
-    if ball.ball.ycor() <= -480 and direction == 1:
-        direction = 2
+    if ball.ball.ycor() <= -500 and direction == 1:
+        # direction = 2
+        game_is_on = False
+        scoreboard.game_over()
     if ball.ball.xcor() <= -280 and direction == 2:
         direction = 3
     if ball.ball.xcor() >= 280 and direction == 3:
@@ -40,8 +49,10 @@ while game_is_on:
         direction = 1
     if ball.ball.xcor() <= -280 and direction == 1:
         direction = 0
-    if ball.ball.ycor() <= -480 and direction == 0:
-        direction = 3
+    if ball.ball.ycor() <= -500 and direction == 0:
+        # direction = 3
+        game_is_on = False
+        scoreboard.game_over()
     if ball.ball.ycor() >= 430 and direction == 3:
         direction = 0
     
