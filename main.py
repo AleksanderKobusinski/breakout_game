@@ -1,6 +1,8 @@
 from turtle import Screen
 from player import Player
 from ball import Ball
+from scoreboard import Scoreboard
+import borders
 import time
 
 screen = Screen()
@@ -11,7 +13,10 @@ screen.tracer(0)
 
 player = Player()
 ball = Ball()
+scoreboard = Scoreboard()
 direction = 0
+
+borders.draw_borders()
 
 screen.listen()
 screen.onkey(player.left, 'Left')
@@ -25,19 +30,19 @@ while game_is_on:
     
     if ball.ball.xcor() >= 280 and direction == 0:
         direction = 1
-    elif ball.ball.ycor() <= -480 and direction == 1:
+    if ball.ball.ycor() <= -480 and direction == 1:
         direction = 2
-    elif ball.ball.xcor() <= -280 and direction == 2:
+    if ball.ball.xcor() <= -280 and direction == 2:
         direction = 3
-    elif ball.ball.xcor() >= 280 and direction == 3:
+    if ball.ball.xcor() >= 280 and direction == 3:
         direction = 2
-    elif ball.ball.ycor() >= 480 and direction == 2:
+    if ball.ball.ycor() >= 430 and direction == 2:
         direction = 1
-    elif ball.ball.xcor() <= -280 and direction == 1:
+    if ball.ball.xcor() <= -280 and direction == 1:
         direction = 0
-    elif ball.ball.ycor() <= -480 and direction == 0:
+    if ball.ball.ycor() <= -480 and direction == 0:
         direction = 3
-    elif ball.ball.ycor() >= 480 and direction == 3:
+    if ball.ball.ycor() >= 430 and direction == 3:
         direction = 0
     
     

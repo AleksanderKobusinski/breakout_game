@@ -1,22 +1,27 @@
 from turtle import Turtle
 Y = -450
-STARTING_POSITION = (0, Y)
+STARTING_POSITION = [(20, Y), (0, Y), (-20, Y)]
 MOVE_DISTANCE = 20
 
 class Player:
     
     def __init__(self):
-        self.player = Turtle(shape='square')
-        self.player.color('white')
-        self.player.penup()
-        self.player.setposition(STARTING_POSITION)
+        self.player = []
+        for position in STARTING_POSITION:
+            new_segment = Turtle(shape='square')
+            new_segment.color('white')
+            new_segment.penup()
+            new_segment.setposition(position)
+            self.player.append(new_segment)
         
     def left(self):
-        new_x = self.player.xcor() - MOVE_DISTANCE
-        self.player.goto(new_x, Y)
+        for segment in self.player:
+            new_x = segment.xcor() - MOVE_DISTANCE
+            segment.goto(new_x, Y)
     
     def right(self):
-        new_x = self.player.xcor() + MOVE_DISTANCE
-        self.player.goto(new_x, Y)
+        for segment in self.player:
+            new_x = segment.xcor() + MOVE_DISTANCE
+            segment.goto(new_x, Y)
     
     
